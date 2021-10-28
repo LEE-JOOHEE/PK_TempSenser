@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head onload="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <META HTTP-EQUIV="refresh" CONTENT="1"> -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/hepi_favicon_icon.ico">
+  <title>PK밸브 열화상센서 작업 계획</title>
+  <!-- Nucleo Icons -->
+  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="./assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/emissivitySetting.css" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-100" onload="getEmissivityData()">
+  <div class="sidenav-footer mx-3 pt-3">
+      <div class="card card-background shadow-none bg-transparent" id="sidenavCard">
+        <div class="full-background" style="background-image: url('./assets/img/curved-images/curved14.jpg')">
+          <span class="mask bg-gradient-primary opacity-6" style="border-radius: 1rem;"></span>
+        </div>
+        <div class="card-body text-start p-3 w-100" style="height: 110px;">
+          <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
+            <i class="ni ni-time-alarm text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
+          </div>
+          <div class="docs-info">
+            <!-- 날짜/시계 -->
+            <div id="clock">
+              <p class="date font-weight-bold"></p>
+              <p class="time font-weight-bolder"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="row">
+      <!-- 온도 측정값 -->
+      <div class="col-md-6">
+          <div class="card my-3 ms-4" style="border: 1px solid #eee;">
+              <div class="card-body">
+                  <div class="card-header mx-4 p-3 mt-3 text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+                          <i class="ni ni-tv-2 text-white opacity-10" aria-hidden="true"
+                             style="font-size: 30px; margin-top: 2px;"></i>
+                      </div>
+                  </div>
+                  <div class="card-body pt-0 p-3 text-center">
+                      <h6 class="card-title text-center mb-0">온도 측정값</h6>
+                      <span class="text-lg">Temperature measurement</span>
+                      <div id="count"></div>
+                      <hr class="horizontal dark my-3">
+                      <h5 class="my-4"><span class="temp">1500</span><span style="font-size: 80px;">℃</span></h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <!-- 시간대별 온도 그래프   -->
+      <div class="col-md-6">
+          <div class="card my-3 me-4" style="border: 1px solid #eee;">
+              <div class="card-body">
+                  <div class="card-header mx-4 p-3 pb-0 mt-0 pt-1 text-center">
+                      <div id="count2"></div>
+                      <h3 class="card-title text-center">시간대별 온도 그래프</h3>
+                  </div>
+                  <div class="chart" style="height: 404px; margin-top: 6px;">
+                      <canvas id="line-chart-gradient" class="chart-canvas" height="300px"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card my-3 mx-4 mt-0" style="border: 1px solid #eee;">
+              <div class="card-header pt-4 ps-5 pb-0">
+                  <div class="row">
+                      <div class="col-md-5">
+                          <h3 class="card-title mt-3 mb-5">방사율 설정</h3>
+                          <div class="input-group input-group-lg mb-4 mt-4" id="resetEmissivity">
+                              <span class="input-group-text">설정값</span>
+                              <div class="form-control readonly_display" id="nowEmissivity">0.44</div>
+                          </div>
+                          <div class="input-group input-group-lg mb-4">
+                              <span class="input-group-text">변경값</span>
+                              <input type="text" class="form-control display" id="changeEmissivity"/>
+                          </div>
+                          <button class="confirm_btn mt-3" role="button" onclick="sendData();">확인</button>
+                      </div>
+  
+                      <div class="col-md-7 ps-5 pe-4">
+                          <div class="setting">
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">1</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">2</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">3</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">4</button>
+                                  </div>
+                              </div>
+                              <div class="row mt-2">
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">5</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">6</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">7</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">8</button>
+                                  </div>
+                              </div>
+                              <div class="row mt-2">
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">9</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="digit">0</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="decimal">.</button>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="button" class="clear">C</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="/js/jquery.min.js"></script>
+  <!--   Core JS Files   -->
+  <script src="./assets/js/core/popper.min.js"></script>
+  <script src="./assets/js/core/bootstrap.min.js"></script>
+  <script src="./assets/js/plugins/chartjs.min.js"></script>
+  <script src="./assets/js/plugins/countup.min.js"></script>
+  <script src="./js/emissivitySetting.js"></script>
+  <script src="./js/commonTemp.js"></script>
+  <script src="./js/common.js"></script>
+  <script>
+    getTemperatureData();
+    var counter = 0;
+    // window.setInterval("refreshDiv1sec()", 10000000);
+    function refreshDiv1sec() {
+        $('.temp').empty();
+        $('.temp').append(globalTempData);
+        counter = counter + 1;
+        document.getElementById("count").innerHTML = "Testing " + counter;
+        getTemperatureData();
+    }
+
+    getGraphData();
+    var counter2 = 0;
+    // window.setInterval("refreshDiv10sec()", 10000000);
+    function refreshDiv10sec() {
+        counter2 = counter2 + 1;
+        document.getElementById("count2").innerHTML = "Testing " + counter2;
+        getGraphData();
+    }
+
+    /* 시간대별 온도 그래프 */
+    var ctx2 = document.getElementById("line-chart-gradient").getContext("2d");
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+    var myChart = new Chart(ctx2, {
+        type: "line",
+        data: {
+        labels: ["09:49:34", "10:50:01", "11:50:06", "12:50:14", "13:50:20", "14:50:24"],
+        datasets: [{
+            label: "온도값",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [1200, 1400, 900, 800, 1300, 1500],
+            maxBarThickness: 6
+        }],
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+            display: true,
+            text: "날짜 : 2021-10-26",
+            align: 'end',
+            font: {size: 18}
+            },
+            legend: {
+            display: false,
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+        scales: {
+            y: {
+            grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5]
+            },
+            ticks: {
+                display: true,
+                padding: 10,
+                color: '#344767',
+                font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+                }
+            },
+            min:  700,
+            max: 1600
+            },
+            x: {
+            grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+                borderDash: [5, 5]
+            },
+            ticks: {
+                display: true,
+                color: '#344767',
+                padding: 10,
+                font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+                },
+            }
+            },
+        },
+        },
+    });
+
+
+
+  </script>
+</body>
+
+</html>

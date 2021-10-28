@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+  /*overflow: hidden;*/
+}
+
+body {
+  background-color: #e6e8e6;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.calculator {
+  background-color: #bfb8da;
+  border-radius: 20px;
+  width: 300px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px 10px #8e96a2;
+}
+
+.setting {
+  background: linear-gradient(300deg, #e96443, #904e95);
+  border-radius: 20px;
+  padding: 30px 30px 20px 30px;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: 3px 3px 8px rgba(142,150,162,0.75);
+}
+
+.display {
+  /* background-color: #f5f1e3; */
+  /* border: none; */
+  /* width: 100%; */
+  /* height: 50px; */
+  /* border-radius: 16px; */
+  /* margin: 10px 0; */
+  border: 1px solid #d2d6da;
+  text-align: right;
+  font-size: 26px;
+  font-weight: 900;
+  padding: 0 20px;
+}
+
+.display:focus {
+  outline: none;
+}
+
+.readonly_display{
+  text-align: right;
+  font-size: 26px;
+  font-weight: 900;
+  padding: 0 20px;
+  background-color: #d9d9d9;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+button{
+  border: 1px solid #b8586f;
+  background: #fff;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+  border-radius: 0.5rem;
+  color: #344767;
+  font-size: 40px;
+  font-weight: 900;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 7px;
+  padding: 10px 0;
+}
+
+button:focus {
+  outline: none;
+}
+
+
+/* 확인버튼 */
+.confirm_btn {
+  align-self: center;
+  background-color: #cc2b5e;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #eee;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  /*color: #41403e;*/
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1.2rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.confirm_btn:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.confirm_btn:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+
+/* 공통부분 */
+.temp {
+  font-size: 140px;
+  padding-right: 20px;
+  background: linear-gradient(310deg, #7928ca, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-title {
+  font-size: 25px;
+}
+
+/* .card{box-shadow: 0 5px 15px 0 rgb(0 0 0 / 5%);} */
+.card {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+}
+
+.input-group-lg > .input-group-text {
+  padding: 1rem;
+  font-size: 20px;
+}
+
+.input-group-lg > .form-control {
+  font-size: 25px;
+}
+
+#nowEmissivity {
+  border: 1px solid #d2d6da;
+  padding-top: 15px
+}
+
+#changeEmissivity {
+  border: 1px solid #d2d6da;
+}
+
+/* clock 관련 css */
+#clock p{margin: 0; padding: 0;}
+#clock { 
+  font-family: 'Open Sans';
+  font-weight: bolder;
+  color: #fff; 
+  text-align: center; 
+  position: relative;
+  left: 50%;
+  top: 50%;
+  /* margin-top: 5px; */
+  transform: translate(-50%, -50%); 
+  /* color: #daf6ff;  */
+  /* text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);  */
+  /* linear-gradient(310deg, #7928CA 0%, #FF0080 100%) */
+} 
+#clock .time { letter-spacing: 0.05em; font-size: 28px; padding: 0 0 5px 0; } 
+#clock .date { letter-spacing: 0.1em; font-size: 16px; }
