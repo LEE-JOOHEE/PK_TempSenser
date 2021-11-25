@@ -1,7 +1,8 @@
 * {
   box-sizing: border-box;
   font-family: "Rubik", sans-serif;
-  /*overflow: hidden;*/
+  max-width: 1910px;
+  /* overflow: hidden; */
 }
 
 body {

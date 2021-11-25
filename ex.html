@@ -19,25 +19,30 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100" onload="getEmissivityData()">
-  <div class="sidenav-footer mx-3 pt-3">
-      <div class="card card-background shadow-none bg-transparent" id="sidenavCard">
-        <div class="full-background" style="background-image: url('./assets/img/curved-images/curved14.jpg')">
-          <span class="mask bg-gradient-primary opacity-6" style="border-radius: 1rem;"></span>
-        </div>
-        <div class="card-body text-start p-3 w-100" style="height: 110px;">
-          <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-            <i class="ni ni-time-alarm text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
-          </div>
-          <div class="docs-info">
-            <!-- 날짜/시계 -->
-            <div id="clock">
-              <p class="date font-weight-bold"></p>
-              <p class="time font-weight-bolder"></p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="sidenav-footer mx-4 pt-3">
+                <div class="card card-background shadow-none bg-transparent" id="sidenavCard">
+                    <div class="full-background" style="background-image: url('./assets/img/curved-images/curved14.jpg')">
+                    <span class="mask bg-gradient-primary opacity-6" style="border-radius: 1rem;"></span>
+                    </div>
+                    <div class="card-body text-start p-3 w-100" style="height: 110px;">
+                    <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
+                        <i class="ni ni-time-alarm text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
+                    </div>
+                    <div class="docs-info">
+                        <!-- 날짜/시계 -->
+                        <div id="clock">
+                        <p class="date font-weight-bold"></p>
+                        <p class="time font-weight-bolder"></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
   <div class="row">
       <!-- 온도 측정값 -->
       <div class="col-md-6">
@@ -156,25 +161,25 @@
   <script src="./js/commonTemp.js"></script>
   <script src="./js/common.js"></script>
   <script>
-    getTemperatureData();
-    var counter = 0;
+    // getTemperatureData();
+    // var counter = 0;
     // window.setInterval("refreshDiv1sec()", 10000000);
-    function refreshDiv1sec() {
-        $('.temp').empty();
-        $('.temp').append(globalTempData);
-        counter = counter + 1;
-        document.getElementById("count").innerHTML = "Testing " + counter;
-        getTemperatureData();
-    }
+    // function refreshDiv1sec() {
+    //     $('.temp').empty();
+    //     $('.temp').append(globalTempData);
+    //     counter = counter + 1;
+    //     document.getElementById("count").innerHTML = "Testing " + counter;
+    //     getTemperatureData();
+    // }
 
-    getGraphData();
-    var counter2 = 0;
-    // window.setInterval("refreshDiv10sec()", 10000000);
-    function refreshDiv10sec() {
-        counter2 = counter2 + 1;
-        document.getElementById("count2").innerHTML = "Testing " + counter2;
-        getGraphData();
-    }
+    // getGraphData();
+    // var counter2 = 0;
+    // // window.setInterval("refreshDiv10sec()", 10000000);
+    // function refreshDiv10sec() {
+    //     counter2 = counter2 + 1;
+    //     document.getElementById("count2").innerHTML = "Testing " + counter2;
+    //     getGraphData();
+    // }
 
     /* 시간대별 온도 그래프 */
     var ctx2 = document.getElementById("line-chart-gradient").getContext("2d");
